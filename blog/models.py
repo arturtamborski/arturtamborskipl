@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 from django.utils.text import slugify
 
 class Category(models.Model):
@@ -14,6 +15,12 @@ class Category(models.Model):
     def __unicode__(self):
         return u'{}'.format(self.name)
 
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.slug = slugify(self.name)
+        super(Article, self).save(*args, **kwargs)
+
+
 class Tag(models.Model):
     name = models.CharField(max_length=64)
     slug = models.SlugField(editable=False)
@@ -24,10 +31,16 @@ class Tag(models.Model):
     def __unicode__(self):
         return u'{}'.format(self.name)
 
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.slug = slugify(self.name)
+        super(Article, self).save(*args, **kwargs)
+
+
 class Article(models.Model):
     title    = models.CharField(max_length=256)
     slug     = models.SlugField(editable=False)
-    date     = models.DateField()
+    date     = models.DateTimeField(default=timezone.now)
     tags     = models.ManyToManyField(Tag)
     category = models.ForeignKey(Category)
     body     = models.TextField()
