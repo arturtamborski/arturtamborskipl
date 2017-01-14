@@ -43,7 +43,9 @@ class Article(models.Model):
     date     = models.DateTimeField(default=timezone.now)
     tags     = models.ManyToManyField(Tag)
     category = models.ForeignKey(Category)
-    body     = models.TextField()
+    prologue = models.TextField()
+    content  = models.TextField()
+    epilogue = models.TextField()
 
     def __str__(self):
         return self.title

@@ -9,7 +9,7 @@ def home(request):
 
     try:
         # find three latest articles and sort them from latest one 
-        articles = blog.Article.objects.filter(date__lte=timezone.now()).order_by('-date')[:NUM_LAST_ARTICLES]
+        articles = blog.Article.objects.defer('content').filter(date__lte=timezone.now()).order_by('-date')[:NUM_LAST_ARTICLES]
     except ObjectDoesNotExist:
         raise Http404('Article does not exist!')
 
