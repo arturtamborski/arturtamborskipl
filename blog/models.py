@@ -4,10 +4,10 @@ from django.utils.text import slugify
 
 class Category(models.Model):
     name = models.CharField(max_length=64)
-    slug = models.SlugField(editable=False)
+    slug = models.SlugField(unique=True, editable=False)
 
     class Meta:
-        verbose_name_plural = "categories"
+        verbose_name_plural = 'categories'
 
     def __str__(self):
         return self.name
@@ -16,14 +16,13 @@ class Category(models.Model):
         return u'{}'.format(self.name)
 
     def save(self, *args, **kwargs):
-        if not self.id:
-            self.slug = slugify(self.name)
+        self.slug = slugify(self.name)
         super(Category, self).save(*args, **kwargs)
 
 
 class Tag(models.Model):
     name = models.CharField(max_length=64)
-    slug = models.SlugField(editable=False)
+    slug = models.SlugField(unique=True, editable=False)
 
     def __str__(self):
         return self.name
@@ -32,14 +31,13 @@ class Tag(models.Model):
         return u'{}'.format(self.name)
 
     def save(self, *args, **kwargs):
-        if not self.id:
-            self.slug = slugify(self.name)
+        self.slug = slugify(self, self.name)
         super(Tag, self).save(*args, **kwargs)
 
 
 class Article(models.Model):
     title    = models.CharField(max_length=256)
-    slug     = models.SlugField(editable=False)
+    slug     = models.SlugField(unique=True, editable=False)
     date     = models.DateTimeField(default=timezone.now)
     tags     = models.ManyToManyField(Tag)
     category = models.ForeignKey(Category)
@@ -54,6 +52,5 @@ class Article(models.Model):
         return u'{}'.format(self.name)
 
     def save(self, *args, **kwargs):
-        if not self.id:
-            self.slug = slugify(self.title)
+        self.slug = unique_slugify(self, self.title)
         super(Article, self).save(*args, **kwargs)
