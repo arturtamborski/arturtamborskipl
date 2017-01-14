@@ -18,7 +18,7 @@ class Category(models.Model):
     def save(self, *args, **kwargs):
         if not self.id:
             self.slug = slugify(self.name)
-        super(Article, self).save(*args, **kwargs)
+        super(Category, self).save(*args, **kwargs)
 
 
 class Tag(models.Model):
@@ -34,7 +34,7 @@ class Tag(models.Model):
     def save(self, *args, **kwargs):
         if not self.id:
             self.slug = slugify(self.name)
-        super(Article, self).save(*args, **kwargs)
+        super(Tag, self).save(*args, **kwargs)
 
 
 class Article(models.Model):
