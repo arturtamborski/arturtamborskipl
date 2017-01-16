@@ -1,0 +1,93 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+html {
+    width: 100%;
+    min-width: 100%;
+}
+body {
+    max-width: 650px;
+    margin: 0 auto;
+    padding: 2em;
+    color: #333;
+    line-height: 1.6;
+    font-size: 18px;
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-smoothing: antialiased;
+}
+header {
+    margin: 2em;
+    text-align:center;
+}
+main {
+}
+article {
+}
+aside {
+    font-size: 80%;
+}
+footer {
+    font-size: x-small;
+    text-align: center;
+}
+code {
+    font-size:125%;
+    font-family: 'Fira Mono', monospace;
+}
+h1, h2, h3 {
+    line-height: 1.2;
+    display:block;
+}
+a {
+    text-decoration: none;
+    color: #080;
+}
+a:hover {
+    text-decoration: underline;
+}
+.article-title {
+}
+.article-meta {
+    font-style: italic;
+}
+.article-meta-date {
+}
+.article-meta-category {
+}
+.article-meta-tags {
+}
+.article-meta-tag {
+    padding: 0.5em;
+    margin: 0.5em;
+}
+.article-prologue {
+}
+.article-content {
+}
+.article-epilogue {
+}
+.article-comments {
+}
+.center{text-align:center;}
+
+.hljs{display:block;overflow-x:auto;background:#252121;color:#ccc}
+.hljs-comment,.hljs-quote{color:#777}
+.hljs-keyword,.hljs-selector-tag{color:#c26230}
+.hljs-string,.hljs-regexp,.hljs-variable,.hljs-template-variable{color:#a5c261}
+.hljs-subst{color:#519f50}
+.hljs-tag,.hljs-name{color:#e8bf6a}
+.hljs-type{color:#da4939}
+.hljs-symbol,.hljs-bullet,.hljs-built_in,.hljs-builtin-name,.hljs-attr,.hljs-link{color:#6d9cbe}
+.hljs-number{color:orange}
+.hljs-params{color:#d0d0ff}
+.hljs-attribute{color:#cda869}
+.hljs-meta{color:#9b859d}
+.hljs-title,.hljs-section{color:#ffc66d}
+.hljs-addition{background-color:#144212;color:#e6e1dc;display:inline-block;width:100%}
+.hljs-deletion{background-color:#600;color:#e6e1dc;display:inline-block;width:100%}
+.hljs-selector-class{color:#9b703f}
+.hljs-selector-id{color:#8b98ab}
+.hljs-emphasis{font-style:italic}
+.hljs-strong{font-weight:700}
+.hljs-link{text-decoration:underline}
