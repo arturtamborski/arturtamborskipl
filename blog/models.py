@@ -1,6 +1,9 @@
 from django.db import models
 from django.utils import timezone
 from django.utils.text import slugify
+from django.core.urlresolvers import reverse
+
+from blog import views as blog
 
 class Category(models.Model):
     name = models.CharField(max_length=64)
@@ -19,6 +22,10 @@ class Category(models.Model):
         self.slug = slugify(self.name)
         super(Category, self).save(*args, **kwargs)
 
+    def get_absolute_url(self):
+        return reverse(blog.category, args=[self.slug])
+
+
 
 class Tag(models.Model):
     name = models.CharField(max_length=64)
@@ -33,6 +40,7 @@ class Tag(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self, self.name)
         super(Tag, self).save(*args, **kwargs)
+
 
 
 class Article(models.Model):
@@ -52,5 +60,8 @@ class Article(models.Model):
         return u'{}'.format(self.name)
 
     def save(self, *args, **kwargs):
-        self.slug = unique_slugify(self, self.title)
+        self.slug = slugify(self.title)
         super(Article, self).save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse(blog.article, args=[self.slug])
