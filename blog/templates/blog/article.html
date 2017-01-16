@@ -1,0 +1,35 @@
+{% extends "blog/base.html" %}
+
+{% block title %}
+{% if articles|length == 0 %}{{ articles.first.title }} | {% endif %}Artur Tamborski
+{% endblock %}
+
+{% block content %}
+{% for article in articles %}
+<article>
+    <div class="article-title">
+        <h2><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></h2>
+    </div>
+    <div class="article-meta">
+        <aside>
+            <span class="article-meta-date">{{ article.date|date:"l, j E Y" }} {{ article.date|time:"H:i" }}</span>
+            <span class="article-meta-category"><a href="{{ article.category.get_absolute_url }}">{{ article.category }}</a></span>
+            <span class="article-meta-tags">{% for tag in article.tags.all %}<span class="article-meta-tag">{{ tag }}</span>{% endfor %}</span>
+        </aside>
+        <div class="article-prologue">
+            {{ article.prologue|urlize|linebreaksbr }}
+        </div>
+        {% if not isroot %}
+        <div class="article-content">
+            {{ article.content|urlize|linebreaksbr }}
+        </div>
+        <div class="article-epilogue">
+            {{ article.epilogue|urlize|linebreaksbr }}
+        </div>
+        <div class="article-comments">
+        </div>
+        {% endif %}
+    </div>
+</article>
+{% endfor %}
+{% endblock %}
