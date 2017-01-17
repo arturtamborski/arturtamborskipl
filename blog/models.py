@@ -57,7 +57,7 @@ class Article(models.Model):
         return self.title
 
     def __unicode__(self):
-        return u'{}'.format(self.name)
+        return u'{}'.format(self.title)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
