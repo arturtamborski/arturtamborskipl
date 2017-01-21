@@ -43,6 +43,23 @@ class Tag(models.Model):
 
 
 
+class ArticleQuerySet(models.QuerySet):
+    def published(self):
+        return self.filter(date__lte=timezone.now())
+
+    def search(self, term):
+        return self.filter(title__icontains=term)
+
+    def prev(self, date):
+        """ Return previous posts relative to `date` """
+        return self.filter(date__lt=date)
+
+    def next(self, date):
+        """ Return next posts relative to `date` """
+        return self.filter(date__gt=date)
+
+
+
 class Article(models.Model):
     title    = models.CharField(max_length=256)
     slug     = models.SlugField(unique=True, editable=False)
@@ -52,6 +69,11 @@ class Article(models.Model):
     prologue = models.TextField()
     content  = models.TextField()
     epilogue = models.TextField()
+
+    objects = ArticleQuerySet().as_manager()
+
+    class Meta:
+        ordering = ('-date',)
 
     def __str__(self):
         return self.title
@@ -65,3 +87,21 @@ class Article(models.Model):
 
     def get_absolute_url(self):
         return reverse(blog.article, args=[self.slug])
+
+    def prev(self):
+        """ 
+            return previous article relative to `self`.
+            Im not sure about this method. Is there a better one? 
+            Maybe Manager should take care of this... 
+        """
+        try:
+            return Article.objects.published().prev(self.date).first()
+        except IndexError as e:
+            return 0
+
+    def next(self):
+        try:
+            return Article.objects.published().next(self.date).last()
+        except IndexError as e:
+            return 0
+
