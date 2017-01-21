@@ -12,24 +12,38 @@
     </div>
     <div class="article-meta">
         <aside>
-            <span class="article-meta-date">{{ article.date|date:"l, j E Y" }} {{ article.date|time:"H:i" }}</span>
-            <span class="article-meta-category"><a href="{{ article.category.get_absolute_url }}">{{ article.category }}</a></span>
+            <span class="article-meta-date">{{ article.date|date:"l, j E Y" }}</span>
+            <span class="article-meta-category">in <a href="{{ article.category.get_absolute_url }}">{{ article.category }}</a></span></br>
             <span class="article-meta-tags">{% for tag in article.tags.all %}<span class="article-meta-tag">{{ tag }}</span>{% endfor %}</span>
         </aside>
-        <div class="article-prologue">
-            {{ article.prologue|urlize|linebreaksbr }}
-        </div>
-        {% if not isroot %}
-        <div class="article-content">
-            {{ article.content|urlize|linebreaksbr }}
-        </div>
-        <div class="article-epilogue">
-            {{ article.epilogue|urlize|linebreaksbr }}
-        </div>
-        <div class="article-comments">
-        </div>
-        {% endif %}
     </div>
+    <div class="article-prologue">
+        {{ article.prologue|urlize|linebreaksbr|safe }}
+    </div>
+    {% if not isroot %}
+    <div class="article-content">
+        {{ article.content|urlize|linebreaksbr|safe }}
+    </div>
+    <div class="article-epilogue">
+        {{ article.epilogue|urlize|linebreaksbr|safe }}
+    </div>
+    <div class="article-nav">
+    {% if article.prev %}
+    <span class="article-nav-prev">
+        <-
+        <a href="{{ article.prev.get_absolute_url }}">{{ article.prev }}</a>
+    </span>
+    {% endif %}
+    {% if article.next %}
+    <span class="article-nav-next">
+        <a href="{{ article.next.get_absolute_url }}">{{ article.next }}</a>
+        ->
+    </span>
+    {% endif %}
+    </div>
+    <div class="article-comments">
+    </div>
+    {% endif %}
 </article>
 {% endfor %}
 {% endblock %}
