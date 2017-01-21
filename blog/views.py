@@ -1,48 +1,53 @@
 from django.http import Http404, HttpResponse
-from django.shortcuts import render, get_object_or_404, get_list_or_404
 from django.utils import timezone
+from django.shortcuts import render, get_list_or_404
 from . import models as blog
 
 
-
 def home(request):
-    NUM_LAST_ARTICLES = 5
-
-    articles = blog.Article.objects.filter(date__lte=timezone.now()).order_by('-date')[:NUM_LAST_ARTICLES]
-
-    return render(request, 'blog/article.html', {'isroot': True, 'articles': articles})
+    return article(request)
 
 
 
 def article(request, slug=None):
-    if slug is None:
-        articles = get_list_or_404(blog.Article)
-    else:
-        articles = get_list_or_404(blog.Article, slug=slug)
+    prev = None
+    articles = blog.Article.objects.published()
+    if slug is not None:
+        articles = articles.filter(slug=slug)
 
     return render(request, 'blog/article.html', {
-        'isroot': bool(slug is None),
-        'articles': articles
+        'isroot': slug is None,
+        'articles': articles,
         })
 
 
 
 
 def category(request, slug=None):
-    if slug is None:
-        categories = get_list_or_404(blog.Category)
-    else:
-        categories = get_list_or_404(blog.Category, slug=slug)
+    categories = blog.Category.objects.all()
+    if slug is not None:
+        categories = categories.filter(slug=slug)
 
     return render(request, 'blog/category.html', {
-        'isroot': bool(slug is None),
+        'isroot': slug is None,
         'categories': categories,
         })
 
 
+
+def search(request):
+    if 'q' in request.GET:
+        results = blog.Article.objects.search(request.GET['q'])
+        
+    return render(request, 'blog/search.html', {
+        'results': results
+        })
+
+
+
 def meta(request):
     values = sorted(request.META.items())
-    html = []
+    response = []
     for key, value in values:
-        html.append('<tr><td>{}</td><td>{}</td></tr>'.format(key, value))
-    return HttpResponse('<table>%s</table>' % '\n'.join(html))
+        response.append('<tr><td>{}</td><td>{}</td></tr>'.format(key, value))
+    return HttpResponse('<table>{}</table>'.format('\n'.join(response)))
