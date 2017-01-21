@@ -23,6 +23,7 @@ header {
 main {
 }
 article {
+    margin: 3em 0;
 }
 aside {
     font-size: 80%;
@@ -46,10 +47,12 @@ a {
 a:hover {
     text-decoration: underline;
 }
-.article-title {
-}
 .article-meta {
     font-style: italic;
+    margin: 0.5em 0;
+    text-align:center;
+}
+.article-meta-title {
 }
 .article-meta-date {
 }
@@ -58,18 +61,31 @@ a:hover {
 .article-meta-tags {
 }
 .article-meta-tag {
-    padding: 0.5em;
-    margin: 0.5em;
+    padding: 0 0.2em;
+}
+.article-meta-tag:first-child {
+    padding:0;
 }
 .article-prologue {
+    font-style: italic;
+    margin: 0.5em 0;
+
 }
 .article-content {
 }
 .article-epilogue {
+    font-style: italic;
+    margin: 0.5em 0;
+}
+.article-nav {
+    text-align:center;
+}
+.article-nav-prev {
+}
+.article-nav-next {
 }
 .article-comments {
 }
-.center{text-align:center;}
 
 .hljs{display:block;overflow-x:auto;background:#252121;color:#ccc}
 .hljs-comment,.hljs-quote{color:#777}
