@@ -20,10 +20,10 @@ class Category(models.Model):
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
-        super(Category, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse(blog.category, args=[self.slug])
+        return reverse('category', args=[self.slug])
 
 
 
@@ -39,7 +39,7 @@ class Tag(models.Model):
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self, self.name)
-        super(Tag, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
 
 
@@ -83,10 +83,13 @@ class Article(models.Model):
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
-        super(Article, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse(blog.article, args=[self.slug])
+        return reverse('article', args=[self.slug])
+
+    def is_published(self):
+        return self.date <= timezone.now()
 
     def prev(self):
         """ 
