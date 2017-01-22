@@ -1,16 +1,20 @@
 from django.contrib import admin
-from . import models as blog 
 
+from .models import Tag, Category, Article
+
+@admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
     ordering = ('name',)
     list_display = ('id', 'name',)
     search_fields = ('id', 'name',)
 
+@admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     ordering = ('name',)
     list_display = ('id', 'name',)
     search_fields = ('id', 'name',)
 
+@admin.register(Article)
 class ArticleAdmin(admin.ModelAdmin):
     ordering = ('-date',)
     list_filter = ('date',)
@@ -18,7 +22,3 @@ class ArticleAdmin(admin.ModelAdmin):
     search_fields = ('id', 'title', 'date', 'category',)
     date_hierarchy = 'date'
     filter_horizontal = ('tags',)
-
-admin.site.register(blog.Article, ArticleAdmin)
-admin.site.register(blog.Category, CategoryAdmin)
-admin.site.register(blog.Tag, TagAdmin)
