@@ -3,6 +3,8 @@ from django.utils import timezone
 from django.utils.text import slugify
 from django.core.urlresolvers import reverse
 
+from .markup import markup
+
 from blog import views as blog
 
 class Category(models.Model):
@@ -66,9 +68,8 @@ class Article(models.Model):
     date     = models.DateTimeField(default=timezone.now)
     tags     = models.ManyToManyField(Tag)
     category = models.ForeignKey(Category)
-    prologue = models.TextField()
     content  = models.TextField()
-    epilogue = models.TextField()
+    content_html = models.TextField(editable=False, blank=True)
 
     objects = ArticleQuerySet().as_manager()
 
@@ -83,6 +84,7 @@ class Article(models.Model):
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
+        self.content_html = markup(self.content)
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
