@@ -12,7 +12,7 @@ body {
     padding: 2em;
     color: #ccc;
     background:#202121;
-    line-height: 1.6;
+    line-height: 1.618;
     font-size: 18px;
     font-family: 'Open Sans', Arial, sans-serif;
     font-smoothing: antialiased;
@@ -67,16 +67,7 @@ a:hover {
 .article-meta-tag:first-child {
     padding:0;
 }
-.article-prologue {
-    font-style: italic;
-    margin: 0.5em 0;
-
-}
 .article-content {
-}
-.article-epilogue {
-    font-style: italic;
-    margin: 0.5em 0;
 }
 .article-nav {
     text-align:center;
