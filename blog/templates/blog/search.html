@@ -1,0 +1,11 @@
+{% extends "blog/base.html" %}
+
+{% block title %}
+Search | Artur Tamborski
+{% endblock %}
+
+{% block content %}
+{% for article in results %}
+{% include 'blog/snippets/article.html' %}
+{% endfor %}
+{% endblock %}
