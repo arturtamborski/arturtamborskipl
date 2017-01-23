@@ -1,9 +1,7 @@
 {% extends "blog/base.html" %}
 
 {% block title %}
-Kategoria: 
-{% if categories.count == 1 %}{{ categories.first.name }} 
-|{% endif %}
+{% if categories.count == 1 %}{{ categories.first.name }} |{% endif %}
 {% endblock %}
 
 {% block content %}
