@@ -1,12 +1,12 @@
 <article>
+    <div class="article-title">
+        <h2><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></h2>
+    </div>
     <div class="article-meta">
-        <div class="article-meta-title">
-            <h2><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></h2>
-        </div>
         <aside>
             <span class="article-meta-date">{{ article.date|date:"l, j E Y" }}</span>
-            <span class="article-meta-category"> / <a href="{{ article.category.get_absolute_url }}">{{ article.category }}</a></span></br>
-            <span class="article-meta-tags">{% for tag in article.tags.all %}<span class="article-meta-tag">{{ tag }}</span>{% endfor %}</span>
+            <span class="article-meta-category"> / <a href="{{ article.category.get_absolute_url }}">{{ article.category }}</a></span> /
+            <span class="article-meta-tags">{% for tag in article.tags.all %}<span class="article-meta-tag"><a href="{{ article.tag.get_absolute_url }}">{{ tag }}</a></span>{% endfor %}</span>
         </aside>
     </div>
     {% if isroot %}
