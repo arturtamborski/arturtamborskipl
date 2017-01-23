@@ -1,8 +1,7 @@
 {% extends "blog/base.html" %}
 
 {% block title %}
-{% if categories.count == 1 %}{{ category.first.name }} | {% endif %}
-Artur Tamborski
+{% if categories.count == 1 %}{{ category.first.name }} |{% endif %}
 {% endblock %}
 
 {% block content %}

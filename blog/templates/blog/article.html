@@ -1,11 +1,10 @@
 {% extends "blog/base.html" %}
 
 {% block title %}
-{% if articles.count == 1 %}{{ articles.first.title }} | {% endif %}Artur Tamborski
+{% if articles.count == 1 %}{{ articles.first.title }} |{% endif %}
 {% endblock %}
 
 {% block content %}
-{% load markup %}
 {% for article in articles %}
 {% include 'blog/snippets/article.html' %}
 {% endfor %}
