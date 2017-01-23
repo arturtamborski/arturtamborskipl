@@ -27,7 +27,6 @@ article {
     margin: 3em 0;
 }
 aside {
-    font-size: 80%;
 }
 footer {
     font-size: x-small;
@@ -48,12 +47,19 @@ a {
 a:hover {
     text-decoration: underline;
 }
-.article-meta {
-    font-style: italic;
-    margin: 0.5em 0;
+.article-title {
     text-align:center;
+    font-size: 1.618em;
+    margin: 1em 0;
 }
-.article-meta-title {
+.article-meta {
+    font-size: 80%;
+    font-style: italic;
+    color: #888;
+    margin: 1em 0;
+}
+.article-meta a {
+    color: #696;
 }
 .article-meta-date {
 }
@@ -62,10 +68,7 @@ a:hover {
 .article-meta-tags {
 }
 .article-meta-tag {
-    padding: 0 0.2em;
-}
-.article-meta-tag:first-child {
-    padding:0;
+    margin-right: 10px;
 }
 .article-content {
 }
