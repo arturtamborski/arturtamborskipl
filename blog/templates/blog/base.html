@@ -1,4 +1,3 @@
-{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="pl">
     <head>
@@ -11,12 +10,26 @@
     <body>
         <header>
             <h1><a href="{% url 'home' %}">Artur Tamborski</a></h1>
+            <h2>
+                <a href="/about">kontakt</a>
+                <a href="/article">archiwum</a>
+                <a href="/category">kategorie</a>
+                <a href="">tagi</a>
+                <form action="/blog/search" method="get">
+                    <input type="text" name="q">
+                    <input type="submit" value="search">
+                </form>
+            </h2>
         </header>
         <main>
         {% block content %}{% endblock %}
         </main>
-        <link rel="stylesheet" href="{% static 'blog/css/style.css' %}" type="text/css">
-        <script src="{% static 'blog/js/highlight.js' %}></script>
+        <footer>
+            Copyright 2017 &copy; Artur Tamborski.
+        </footer>
+        {% load static %}
+        <link rel="stylesheet" href="{% static '/blog/css/style.css' %}" type="text/css">
+        <script src="{% static 'blog/js/highlight.js' %}"></script>
         <script>hljs.initHighlightingOnLoad();</script>
     </body>
 </html>

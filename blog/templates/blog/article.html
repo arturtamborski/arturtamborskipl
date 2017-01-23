@@ -1,10 +1,11 @@
 {% extends "blog/base.html" %}
 
 {% block title %}
-{% if articles|length == 0 %}{{ articles.first.title }} | {% endif %}Artur Tamborski
+{% if articles.count == 1 %}{{ articles.first.title }} | {% endif %}Artur Tamborski
 {% endblock %}
 
 {% block content %}
+{% load markup %}
 {% for article in articles %}
 <article>
     <div class="article-meta">
@@ -17,16 +18,8 @@
             <span class="article-meta-tags">{% for tag in article.tags.all %}<span class="article-meta-tag">{{ tag }}</span>{% endfor %}</span>
         </aside>
     </div>
-    <div class="article-prologue">
-        {{ article.prologue|urlize|linebreaksbr|safe }}
-    </div>
+        {{ article.content_html|truncatewords_html:40|safe }}
     {% if not isroot %}
-    <div class="article-content">
-        {{ article.content|urlize|linebreaksbr|safe }}
-    </div>
-    <div class="article-epilogue">
-        {{ article.epilogue|urlize|linebreaksbr|safe }}
-    </div>
     <div class="article-nav">
     {% if article.prev %}
     <span class="article-nav-prev">
