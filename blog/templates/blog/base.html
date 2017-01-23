@@ -12,10 +12,10 @@
             <h1><a href="{% url 'home' %}">Artur Tamborski</a></h1>
             <h2>
                 <a href="/about">kontakt</a>
-                <a href="/article">archiwum</a>
-                <a href="/category">kategorie</a>
-                <a href="">tagi</a>
-                <form action="/blog/search" method="get">
+                <a href="{% url 'article' %}">archiwum</a>
+                <a href="{% url 'category' %}">kategorie</a>
+                <a href="{% url 'tag' %}">tagi</a>
+                <form action="{% url 'search' %}" method="get">
                     <input type="text" name="q">
                     <input type="submit" value="szukaj">
                 </form>
