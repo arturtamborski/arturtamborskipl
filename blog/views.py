@@ -3,12 +3,6 @@ from django.utils import timezone
 from django.shortcuts import render, get_list_or_404
 from . import models as blog
 
-
-def home(request):
-    return article(request)
-
-
-
 def article(request, slug=None):
     prev = None
     articles = blog.Article.objects.published()
@@ -22,7 +16,6 @@ def article(request, slug=None):
 
 
 
-
 def category(request, slug=None):
     categories = blog.Category.objects.all()
     if slug is not None:
@@ -33,6 +26,17 @@ def category(request, slug=None):
         'categories': categories,
         })
 
+
+
+def tag(request, slug=None):
+    tags = blog.Tag.objects.all()
+    if slug is not None:
+        tags = tags.filter(slug=slug)
+
+    return render(request, 'blog/tag.html', {
+        'isroot': slug is None,
+        'tags': tags,
+        })
 
 
 def search(request):
@@ -51,3 +55,8 @@ def meta(request):
     for key, value in values:
         response.append('<tr><td>{}</td><td>{}</td></tr>'.format(key, value))
     return HttpResponse('<table>{}</table>'.format('\n'.join(response)))
+
+
+
+def home(request):
+    return article(request)

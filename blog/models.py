@@ -44,6 +44,8 @@ class Tag(models.Model):
         self.slug = slugify(self, self.name)
         super().save(*args, **kwargs)
 
+    def get_absolute_url(self):
+        return reverse('tag', args=[self.slug])
 
 
 class ArticleQuerySet(models.QuerySet):
