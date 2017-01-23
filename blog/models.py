@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.utils.text import slugify
+from django.utils.safestring import mark_safe
 from django.core.urlresolvers import reverse
 
 from .markup import markup
@@ -109,4 +110,3 @@ class Article(models.Model):
             return Article.objects.published().next(self.date).last()
         except IndexError as e:
             return 0
-
