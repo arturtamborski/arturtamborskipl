@@ -1,33 +1,12 @@
 {% extends "blog/base.html" %}
 
 {% block title %}
-{% if categories|length == 0 %}{{ category.first.name }} | {% endif %}
+{% if categories.count == 1 %}{{ category.first.name }} | {% endif %}
 Artur Tamborski
 {% endblock %}
 
 {% block content %}
 {% for category in categories %}
-{% if category.article_set.all|length %}
-<h2>
-    <a href="{{ category.get_absolute_url }}">{{ category.name }}</a>
-</h2>
-{% for article in category.article_set.published %}
-<div class="article-meta">
-    <div class="article-meta-title">
-        <h2><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></h2>
-    </div>
-    <aside>
-        <span class="article-meta-date">{{ article.date|date:"l, j E Y" }}</span>
-        <span class="article-meta-category"><a href="{{ article.category.get_absolute_url }}">{{ article.category }}</a></span>
-        <span class="article-meta-tags">{% for tag in article.tags.all %}<span class="article-meta-tag">{{ tag }}</span>{% endfor %}</span>
-    </aside>
-</div>
-{% if not isroot %}
-<div class="article-prologue">
-    {{ article.prologue|urlize|linebreaksbr|safe }}
-    {% endif %}
-</div>
-{% endfor %}
-{% endif %}
+{% include 'blog/snippets/category.html' %}
 {% endfor %}
 {% endblock %}
