@@ -4,7 +4,6 @@ from django.shortcuts import render, get_list_or_404
 from . import models as blog
 
 def article(request, slug=None):
-    prev = None
     articles = blog.Article.objects.published()
     if slug is not None:
         articles = articles.filter(slug=slug)
@@ -22,7 +21,7 @@ def category(request, slug=None):
         categories = categories.filter(slug=slug)
 
     return render(request, 'blog/category.html', {
-        'isroot': slug is None,
+        'isroot': slug is not None,
         'categories': categories,
         })
 
@@ -39,24 +38,26 @@ def tag(request, slug=None):
         })
 
 
+
 def search(request):
     if 'q' in request.GET:
         results = blog.Article.objects.search(request.GET['q'])
-        
+
     return render(request, 'blog/search.html', {
         'results': results
         })
 
 
 
-def meta(request):
-    values = sorted(request.META.items())
-    response = []
-    for key, value in values:
-        response.append('<tr><td>{}</td><td>{}</td></tr>'.format(key, value))
-    return HttpResponse('<table>{}</table>'.format('\n'.join(response)))
-
-
-
 def home(request):
-    return article(request)
+    articles = blog.Article.objects.published()[:5]
+
+    return render(request, 'blog/article.html', {
+        'articles': articles,
+        })
+
+
+
+def about(request):
+    # FIXME: This is just temporary solution
+    article(request, slug='about')

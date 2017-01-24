@@ -13,7 +13,7 @@ urlpatterns = [
 
     url(r'^search/$', blog.search, name='search'),
 
-    url(r'^meta/$', blog.meta, name='meta'),
+    url(r'^about/$', blog.about, name='about'),
 
     url(r'^$', blog.home, name='home'),
 ]
