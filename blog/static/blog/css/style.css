@@ -25,6 +25,8 @@ main {
 }
 article {
     margin: 3em 0;
+    border-bottom: 1px solid #444;
+    padding-bottom: 3em;
 }
 aside {
 }
@@ -37,7 +39,7 @@ code {
     padding: 1em;
 }
 h1, h2, h3 {
-    line-height: 1.2;
+    line-height: 1.618;
     display:block;
 }
 a {
@@ -84,7 +86,7 @@ a:hover {
 .article-comments {
 }
 
-.hljs{display:block;overflow-x:auto;background:#252121;color:#ccc}
+.hljs{display:block;overflow-x:auto;background:#252626;color:#ccc}
 .hljs-comment,.hljs-quote{color:#777}
 .hljs-keyword,.hljs-selector-tag{color:#c26230}
 .hljs-string,.hljs-regexp,.hljs-variable,.hljs-template-variable{color:#a5c261}
