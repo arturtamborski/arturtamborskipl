@@ -5,12 +5,21 @@ from django.utils.safestring import mark_safe
 from django.core.urlresolvers import reverse
 
 from .markup import markup
-
 from blog import views as blog
+
+
+
+class CategoryQuerySet(models.QuerySet):
+    def search(self, term):
+        return self.filter(name__icontains=term)
+
+
 
 class Category(models.Model):
     name = models.CharField(max_length=64)
     slug = models.SlugField(unique=True, editable=False)
+
+    objects = CategoryQuerySet().as_manager()
 
     class Meta:
         verbose_name_plural = 'categories'
@@ -30,9 +39,17 @@ class Category(models.Model):
 
 
 
+class TagQuerySet(models.QuerySet):
+    def search(self, term):
+        return self.filter(name__icontains=term)
+
+
+
 class Tag(models.Model):
     name = models.CharField(max_length=64)
     slug = models.SlugField(unique=True, editable=False)
+
+    objects = TagQuerySet().as_manager()
 
     def __str__(self):
         return self.name
@@ -53,15 +70,15 @@ class ArticleQuerySet(models.QuerySet):
         return self.filter(date__lte=timezone.now())
 
     def search(self, term):
-        return self.filter(title__icontains=term)
+        return self.published().filter(title__icontains=term)
 
     def prev(self, date):
         """ Return previous posts relative to `date` """
-        return self.filter(date__lt=date)
+        return self.published().filter(date__lt=date)
 
     def next(self, date):
         """ Return next posts relative to `date` """
-        return self.filter(date__gt=date)
+        return self.published().filter(date__gt=date)
 
 
 
@@ -97,18 +114,18 @@ class Article(models.Model):
         return self.date <= timezone.now()
 
     def prev(self):
-        """ 
+        """
             return previous article relative to `self`.
-            Im not sure about this method. Is there a better one? 
-            Maybe Manager should take care of this... 
+            Im not sure about this method. Is there a better one?
+            Maybe Manager should take care of this...
         """
         try:
-            return Article.objects.published().prev(self.date).first()
+            return Article.objects.prev(self.date).first()
         except IndexError as e:
             return 0
 
     def next(self):
         try:
-            return Article.objects.published().next(self.date).last()
+            return Article.objects.next(self.date).last()
         except IndexError as e:
             return 0
