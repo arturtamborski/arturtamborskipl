@@ -1,8 +1,13 @@
 {% if category.article_set.published.count %}
 <h2>
     <a href="{{ category.get_absolute_url }}">{{ category.name }}</a>
+{% if isroot %}
+{{ category.article_set.count }}
+</h2>
+{% else %}
 </h2>
 {% for article in category.article_set.published %}
-{% include 'blog/snippets/article.html' %}
+{% include 'blog/snippets/article.html' with isroot=1 %}
 {% endfor %}
+{% endif %}
 {% endif %}
