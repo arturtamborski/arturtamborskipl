@@ -4,9 +4,9 @@ from django.shortcuts import render, get_list_or_404
 from . import models as blog
 
 def article(request, slug=None):
-    articles = blog.Article.objects.published()
-    if slug is not None:
-        articles = articles.filter(slug=slug)
+    articles = blog.Article.objects.published().filter(slug=slug)
+    if slug is None:
+        articles = blog.Article.objects.published()
 
     return render(request, 'blog/article.html', {
         'isroot': slug is None,
@@ -16,21 +16,21 @@ def article(request, slug=None):
 
 
 def category(request, slug=None):
-    categories = blog.Category.objects.all()
-    if slug is not None:
-        categories = categories.filter(slug=slug)
+    categories = blog.Category.objects.filter(slug=slug)
+    if slug is None:
+        categories = blog.Category.objects.all()
 
     return render(request, 'blog/category.html', {
-        'isroot': slug is not None,
+        'isroot': slug is None,
         'categories': categories,
         })
 
 
 
 def tag(request, slug=None):
-    tags = blog.Tag.objects.all()
-    if slug is not None:
-        tags = tags.filter(slug=slug)
+    tags = blog.Tag.objects.all().filter(slug=slug)
+    if slug is None:
+        tags = blog.Tag.objects.all()
 
     return render(request, 'blog/tag.html', {
         'isroot': slug is None,
@@ -40,11 +40,16 @@ def tag(request, slug=None):
 
 
 def search(request):
-    if 'q' in request.GET:
-        results = blog.Article.objects.search(request.GET['q'])
+    if 'q' in request.GET and len(request.GET['q']):
+        q = request.GET['q']
+        articles    = blog.Article.objects.search(q)
+#        categories  = blog.Category.objects.search(q)
+#        tags        = blog.Tag.objects.search(q)
 
     return render(request, 'blog/search.html', {
-        'results': results
+            'articles': articles,
+#            'categories': categories,
+#            'tags': tags,
         })
 
 
@@ -53,6 +58,7 @@ def home(request):
     articles = blog.Article.objects.published()[:5]
 
     return render(request, 'blog/article.html', {
+        'isroot': True,
         'articles': articles,
         })
 
