@@ -5,63 +5,84 @@
 html {
     width: 100%;
     min-width: 100%;
+    font-size: 18px;
 }
 body {
-    max-width: 650px;
+    max-width: 700px;
     margin: 0 auto;
-    padding: 2em;
-    color: #ccc;
-    background:#202121;
-    line-height: 1.618;
-    font-size: 18px;
+    color: #ddd;
+    background:#212121;
+    line-height: 1.618rem;
     font-family: 'Open Sans', Arial, sans-serif;
     font-smoothing: antialiased;
 }
 header {
-    margin: 2em;
+    padding: 2rem 0;
     text-align:center;
 }
 main {
 }
 article {
-    margin: 3em 0;
-    border-bottom: 1px solid #444;
-    padding-bottom: 3em;
+    padding: 1em 0;
+    border-bottom: 2px solid #444;
 }
 aside {
 }
 footer {
-    font-size: x-small;
+    padding: 1rem 0;
+    font-size: 0.6rem;
+    color: #888;
     text-align: center;
 }
-code {
+pre code {
     font-family: 'Fira Mono', monospace;
-    padding: 1em;
+    padding: 0.618rem;
 }
-h1, h2, h3 {
-    line-height: 1.618;
-    display:block;
+code {
+    background: #252525;
+    padding: 0.618rem;
+}
+blockquote p {
+    padding: 0.618rem;
+    background: #252525;
+    border-left: 2px solid #444;
+}
+em {
+    padding: 0.618rem;
+    background: #252525;
+}
+p {
+    padding: 1.23rem 0;
 }
 a {
     text-decoration: none;
-    color: #6c6;
+    color: #7c6;
 }
 a:hover {
     text-decoration: underline;
 }
+h1, h2, h3, h4, h5, h6 {
+    margin: 0.618rem 0;
+}
+ul, ol {
+    list-style-position: inside;
+    display: block;
+}
 .article-title {
-    text-align:center;
-    font-size: 1.618em;
-    margin: 1em 0;
+    text-align:left;
+    font-size: 1.618rem;
+}
+.article-title h2 a {
+    line-height: 1.18em;
 }
 .article-meta {
-    font-size: 80%;
+    font-size: 0.8em;
     font-style: italic;
     color: #888;
-    margin: 1em 0;
+    margin: 1rem 0;
 }
 .article-meta a {
-    color: #696;
+    color: #796;
 }
 .article-meta-date {
 }
@@ -70,12 +91,12 @@ a:hover {
 .article-meta-tags {
 }
 .article-meta-tag {
-    margin-right: 10px;
+    margin-right: 5px;
 }
 .article-content {
 }
 .article-nav {
-    text-align:center;
+    margin-top: 1rem;
     display: flex;
     justify-content: space-around;
 }
@@ -86,7 +107,7 @@ a:hover {
 .article-comments {
 }
 
-.hljs{display:block;overflow-x:auto;background:#252626;color:#ccc}
+.hljs{display:block;overflow-x:auto;background:#252525;color:#ccc}
 .hljs-comment,.hljs-quote{color:#777}
 .hljs-keyword,.hljs-selector-tag{color:#c26230}
 .hljs-string,.hljs-regexp,.hljs-variable,.hljs-template-variable{color:#a5c261}
