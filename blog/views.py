@@ -1,12 +1,31 @@
-from django.http import Http404, HttpResponse
 from django.utils import timezone
-from django.shortcuts import render, get_list_or_404
+from django.shortcuts import render
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
 from . import models as blog
 
+PAGE_MAX = 5
+
+
+def get_objects(request, objects, slug=None):
+    if slug is not None:
+        objects = objects.filter(slug=slug)
+
+    page = request.GET.get('p', 1)
+    paginator = Paginator(objects, PAGE_MAX)
+
+    try:
+        objects = paginator.page(page)
+    except PageNotAnInteger:
+        objects = paginator.page(1)
+    except EmptyPage:
+        objects = paginator.page(paginator.num_pages)
+
+    return objects
+
 def article(request, slug=None):
-    articles = blog.Article.objects.published().filter(slug=slug)
-    if slug is None:
-        articles = blog.Article.objects.published()
+    articles = get_objects(
+        request, blog.Article.objects.published(), slug)
 
     return render(request, 'blog/article.html', {
         'isroot': slug is None,
@@ -16,9 +35,8 @@ def article(request, slug=None):
 
 
 def category(request, slug=None):
-    categories = blog.Category.objects.filter(slug=slug)
-    if slug is None:
-        categories = blog.Category.objects.all()
+    categories = get_objects(
+            request, blog.Category.objects.all(), slug)
 
     return render(request, 'blog/category.html', {
         'isroot': slug is None,
@@ -28,9 +46,8 @@ def category(request, slug=None):
 
 
 def tag(request, slug=None):
-    tags = blog.Tag.objects.all().filter(slug=slug)
-    if slug is None:
-        tags = blog.Tag.objects.all()
+    tags = get_objects(
+            request, blog.Tag.objects.all(), slug)
 
     return render(request, 'blog/tag.html', {
         'isroot': slug is None,
@@ -40,30 +57,18 @@ def tag(request, slug=None):
 
 
 def search(request):
-    if 'q' in request.GET and len(request.GET['q']):
-        q = request.GET['q']
-        articles    = blog.Article.objects.search(q)
-#        categories  = blog.Category.objects.search(q)
-#        tags        = blog.Tag.objects.search(q)
+    q = request.GET.get('q', '')
+    objects = get_objects(
+            request, blog.Article.objects.search(q), slug)
 
     return render(request, 'blog/search.html', {
-            'articles': articles,
-#            'categories': categories,
-#            'tags': tags,
+            'objects': objects,
         })
 
 
 
 def home(request):
-    articles = blog.Article.objects.published()[:5]
-
-    return render(request, 'blog/article.html', {
-        'isroot': True,
-        'articles': articles,
-        })
-
-
+    return article(request)
 
 def about(request):
-    # FIXME: This is just temporary solution
-    article(request, slug='about')
+    return article(request, slug='about')
