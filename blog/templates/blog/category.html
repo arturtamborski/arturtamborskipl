@@ -1,11 +1,17 @@
 {% extends "blog/base.html" %}
 
 {% block title %}
-{% if categories.count == 1 %}{{ categories.first.name }} |{% endif %}
+    {% if categories.count == 1 %}
+        {{ categories.first.name }} |
+    {% endif %}
 {% endblock %}
 
 {% block content %}
-{% for category in categories %}
-{% include 'blog/snippets/category.html' %}
-{% endfor %}
+    {% for category in categories %}
+        {% include 'blog/snippets/category.html' %}
+    {% endfor %}
+{% endblock %}
+
+{% block pager %}
+    {% include 'blog/snippets/pager.html' %}
 {% endblock %}

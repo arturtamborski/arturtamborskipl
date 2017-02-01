@@ -1,11 +1,17 @@
 {% extends "blog/base.html" %}
 
 {% block title %}
-{% if tags.count == 1 %}{{ tags.first.name }} |{% endif %}
+    {% if tags.count == 1 %}
+        {{ tags.first.name }} |
+    {% endif %}
 {% endblock %}
 
 {% block content %}
-{% for tag in tags %}
-{% include 'blog/snippets/tag.html' %}
-{% endfor %}
+    {% for tag in tags %}
+        {% include 'blog/snippets/tag.html' %}
+    {% endfor %}
+{% endblock %}
+
+{% block pager %}
+    {% include 'blog/snippets/pager.html' %}
 {% endblock %}
