@@ -1,6 +1,7 @@
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 html {
     width: 100%;
@@ -23,16 +24,28 @@ header {
 main {
 }
 article {
-    padding: 1em 0;
+    padding: 1rem 0;
     border-bottom: 2px solid #444;
 }
 aside {
 }
 footer {
+    border-top: 2px solid #444;
     padding: 1rem 0;
-    font-size: 0.6rem;
+    font-size: 0.618rem;
     color: #888;
     text-align: center;
+}
+#pager {
+    display: table;
+    margin: 1rem auto;
+}
+#pager ul {
+    list-style: none;
+}
+#pager li {
+    display: inline;
+    padding-left: 10px;
 }
 pre code {
     font-family: 'Fira Mono', monospace;
@@ -96,13 +109,22 @@ ul, ol {
 .article-content {
 }
 .article-nav {
-    margin-top: 1rem;
     display: flex;
-    justify-content: space-around;
+    text-align: center;
 }
 .article-nav-prev {
+    width: 50%;
+    padding: 15px;
+}
+.article-nav-prev::before {
+    content: "«";
 }
 .article-nav-next {
+    width: 50%;
+    padding: 15px;
+}
+.article-nav-next::after {
+    content: "»";
 }
 .article-comments {
 }
