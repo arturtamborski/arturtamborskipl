@@ -1,13 +1,20 @@
 import os
 from decouple import config, Csv
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# enviroment variables
 
-DEBUG = config('DEBUG', default=False, cast=bool)
+BASE_DIR        = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-SECRET_KEY = config('SECRET_KEY')
+DEBUG           = config('DEBUG', default=False, cast=bool)
+ALLOWED_HOSTS   = config('ALLOWED_HOSTS', cast=Csv())
+SECRET_KEY      = config('SECRET_KEY')
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
+DB_NAME         = config('DB_NAME')
+DB_USER         = config('DB_USER')
+DB_PASSWORD     = config('DB_PASSWORD')
+DB_HOST         = config('DB_HOST')
+
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -17,8 +24,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sitemaps',
-#    'django.contrib.sites',
-#    'django.contrib.flatpages',
     'blog',
 ]
 
@@ -42,7 +47,6 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
-                'django.template.context_processors.csrf',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
@@ -58,16 +62,15 @@ WSGI_APPLICATION = 'arturtamborskipl.wsgi.application'
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': config('DB_NAME'),
-        'USER': config('DB_USER'),
-        'PASSWORD': config('DB_PASSWORD'),
-        'HOST': config('DB_HOST'),
-        'PORT': '',
-    }
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': DB_NAME,
+            'USER': DB_USER,
+            'PASSWORD': DB_PASSWORD,
+            'HOST': DB_HOST,
+            'PORT': '',
+            }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
@@ -105,7 +108,4 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
-MEDIA_URL = '/media/'
-
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
