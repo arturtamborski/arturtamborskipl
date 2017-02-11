@@ -6,7 +6,7 @@
         <aside>
             <span class="article-meta-date">{{ article.date|date:"l, j E Y" }}</span>
             <span class="article-meta-category"> / <a href="{{ article.category.get_absolute_url }}">{{ article.category }}</a></span> /
-            <span class="article-meta-tags">{% for tag in article.tags.all %}<span class="article-meta-tag"><a href="{{ tag.get_absolute_url }}">#{{ tag }}</a></span>{% endfor %}</span>
+            <span class="article-meta-tags">{% for tag in article.tags.all %}<span class="article-meta-tag"><a href="{{ tag.get_absolute_url }}">{{ tag }}</a></span>{% endfor %}</span>
         </aside>
     </div>
     {% if isroot %}
