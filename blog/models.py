@@ -5,9 +5,6 @@ from django.utils.safestring import mark_safe
 from django.core.urlresolvers import reverse
 
 from .markup import markup
-from blog import views as blog
-
-
 
 class CategoryQuerySet(models.QuerySet):
     def search(self, term):
