@@ -3,7 +3,7 @@ from django.views.generic import TemplateView
 from . import views as blog
 
 urlpatterns = [
-    url(r'^(?P<slug>[\w-]+)/$', blog.article, name='article'),
+    url(r'^post/(?P<slug>[\w-]+)/$', blog.article, name='article'),
     url(r'^$', blog.article, name='article'),
 
     url(r'^category/(?P<slug>[\w-]+)/$', blog.category, name='category'),
