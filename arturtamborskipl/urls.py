@@ -6,7 +6,7 @@ from django.contrib.sitemaps.views import sitemap
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^robots\.txt$', TemplateView.as_view(template_name='robots.txt')),
+    url(r'^robots\.txt$', TemplateView.as_view(template_name='robots.txt', content_type='text/plain')),
     #url(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
     url(r'^', include('blog.urls')),
 ]
