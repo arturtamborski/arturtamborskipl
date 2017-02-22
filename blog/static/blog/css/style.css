@@ -10,8 +10,8 @@ html {
 body {
     max-width: 700px;
     margin: 0 auto;
-    color: #ddd;
-    background:#212121;
+    color: #333;
+    background:#fff;
     line-height: 1.618rem;
     font-family: 'Lato', sans-serif;
 }
@@ -50,7 +50,6 @@ pre code {
     padding: 0.618rem;
 }
 code {
-    background: #252525;
     padding: 0.618rem;
 }
 blockquote p {
@@ -67,13 +66,17 @@ p {
 }
 a {
     text-decoration: none;
-    color: #7c6;
+    color: #069;
 }
 a:hover {
     text-decoration: underline;
 }
+a:visited {
+    color: #058;
+}
 h1, h2, h3, h4, h5, h6 {
     margin: 0.618rem 0;
+    color: #222;
 }
 ul, ol {
     list-style-position: inside;
