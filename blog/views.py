@@ -3,7 +3,6 @@ from django.shortcuts import render
 
 from . import models as blog
 
-
 def article(request, slug=None):
     objects = blog.Article.objects.published()
     if slug is not None:
@@ -47,4 +46,3 @@ def search(request):
     return render(request, 'blog/search.html', {
             'objects': objects,
         })
-

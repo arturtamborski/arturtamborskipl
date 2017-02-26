@@ -1,7 +1,7 @@
 from django.contrib.sitemaps import Sitemap
 from . import models
 
-class BlogSitemap(Sitemap):
+class ArticleSitemap(Sitemap):
     changefreq = 'never'
     protocol = 'https'
     priority = 0.5
