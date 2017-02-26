@@ -14,7 +14,11 @@ DB_USER         = config('DB_USER')
 DB_PASSWORD     = config('DB_PASSWORD')
 DB_HOST         = config('DB_HOST')
 
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_SSL_REDIRECT = True
 
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
 
 INSTALLED_APPS = [
     'django.contrib.admin',
