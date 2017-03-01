@@ -1,38 +1,63 @@
-<!DOCTYPE html>
-<html lang="pl">
+<!doctype html>
+<html lang="en">
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+        <meta charset="utf-8">
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="Wpisy o programowaniu i innych rzeczach.">
         <meta name="author" content="Artur Tamborski">
+
         <title>{% block title %}{% endblock %} Artur Tamborski</title>
+
+        {% load static %}
+        <link rel="stylesheet" href="{% static '/blog/css/spectre.min.css' %}">
+<style>
+article {
+    padding: 30px 0;
+}
+.article-meta ul {
+    font-size: smaller;
+    font-style: italic;
+    padding: 0;
+}
+</style>
     </head>
     <body>
-        <header>
-            <h1><a href="{% url 'home' %}">Artur Tamborski</a></h1>
-            <h2>
-                <a href="{% url 'about' %}">kontakt</a>
-                <a href="{% url 'category' %}">kategorie</a>
-                <a href="{% url 'tag' %}">tagi</a>
-                <form action="{% url 'search' %}" method="get">
-                    <input type="text" name="q">
-                    <input type="submit" value="szukaj">
-                </form>
-            </h2>
+        <header class="navbar container grid-960">
+            <section class="column centered col-9 col-md-11 col-sm-12">
+                <nav class="navbar">
+                    <section class="section navbar-section">
+                        <a class="navbar-brand" href="{% url 'home' %}">Artur Tamborski</a>
+                    </section>
+                    <section class="section navbar-section">
+                        <a class="btn btn-link" href="{% url 'about' %}">About</a>
+                        <a class="btn btn-link" href="{% url 'category' %}">Categories</a>
+                        <a class="btn btn-link" href="{% url 'tag' %}">Tags</a>
+                    </section>
+                    <section class="section navbar-section">
+                        <div class="container">
+                            <div class="columns">
+                                <form class="input-group input-inline" method="get">
+                                    <input class="form-input column col-sm-12" type="search" name="s">
+                                    <input class="btn input-group-btn" type="submit" value="Search">
+                                </form>
+                            </div>
+                        </div>
+                    </section>
+                </nav>
+                <div class="divider"></div>
+            </section>
         </header>
-        <main>
-            {% block content %}{% endblock %}
-        <div id="pager">
-            {% block pager %}{% endblock %}
-        </div>
+        <main class="container grid-960">
+            <section class="column centered col-9 col-md-11 col-sm-12">
+                {% block content %}{% endblock %}
+            </section>
         </main>
-        <footer>
-            Copyright 2017 &copy; Artur Tamborski.
+        <footer class="container grid-960">
+            <section class="column centered text-center col-9 col-md-11 col-sm-12">
+                <div class="divider"></div>
+            </section>
         </footer>
-        {% load static %}
-        <link rel="stylesheet" href="{% static '/blog/css/fonts.css' %}" type="text/css">
-        <link rel="stylesheet" href="{% static '/blog/css/style.css' %}" type="text/css">
-        <script src="{% static 'blog/js/highlight.js' %}"></script>
-        <script>hljs.initHighlightingOnLoad();</script>
     </body>
 </html>

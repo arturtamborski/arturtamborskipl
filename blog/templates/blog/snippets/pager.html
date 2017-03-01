@@ -1,21 +1,16 @@
-{% if articles.has_other_pages %}
-<ul>
-    {% if articles.has_previous %}
-        <li><a href="?p={{ articles.previous_page_number }}">&laquo;</a></li>
-    {% else %}
-        <li><span>&laquo;</span></li>
-    {% endif %}
+{% comment %}
+<ul class="pagination">
+    <li class="page-item">
+        <a href="?p={{ articles.previous_page_number }}" tabindex="{{ articles.previous_page_number }}" {% if not articles.has_previous %}disabled{% endif %}>Previous</a>
+    </li>
     {% for i in articles.paginator.page_range %}
-        {% if articles.number == i %}
-            <li><span>{{ i }}</span></li>
-        {% else %}
-            <li><a href="?p={{ i }}">{{ i }}</a></li>
-        {% endif %}
+        <li class="page-item {% if articles.number == i %}active{% endif %}">
+            <a href="?p={{ i }}">{{ i }}</a>
+        </li>
     {% endfor %}
-    {% if articles.has_next %}
-        <li><a href="?p={{ articles.next_page_number }}">&raquo;</a></li>
-    {% else %}
-        <li><span>&raquo;</span></li>
-    {% endif %}
+    <li class="page-item">
+        <a href="?p={{ articles.next_page_number }}" tabindex="{{ articles.next_page_number }}" {% if not articles.has_next %}disabled{% endif %}>Next</a>
+    </li>
 </ul>
-{% endif %}
+{% endcomment %}
+

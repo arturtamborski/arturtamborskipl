@@ -1,39 +1,45 @@
 <article>
-    <div class="article-title">
-        <h2><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></h2>
-    </div>
+    <a href="{{ article.get_absolute_url }}">
+        <h2>{{ article.title }}</h2>
+    </a>
     <div class="article-meta">
-        <aside>
-            <span class="article-meta-date">{{ article.date|date:"l, j E Y" }}</span>
-            <span class="article-meta-category"> / <a href="{{ article.category.get_absolute_url }}">{{ article.category }}</a></span> /
-            <span class="article-meta-tags">{% for tag in article.tags.all %}<span class="article-meta-tag"><a href="{{ tag.get_absolute_url }}">{{ tag }}</a></span>{% endfor %}</span>
-        </aside>
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item">
+                {{ article.date|date:"l, j E Y" }}
+            </li>
+            <li class="breadcrumb-item">
+                <a href="{{ article.category.get_absolute_url }}">{{ article.category }}</a></span>
+            </li>
+            <li class="breadcrumb-item">
+                {% for tag in article.tags.all %}
+                    <a href="{{ tag.get_absolute_url }}">{{ tag }}</a>
+                {% endfor %}
+            </li>
+        </ul>
     </div>
+    <div>
     {% if isroot %}
-    <div class="article-content">
         {{ article.content_html|truncatewords_html:40|safe }}
-    </div>
     {% else %}
-    <div class="article-content">
         {{ article.content_html|safe }}
     </div>
-    <div class="article-nav">
-        <span class="article-nav-prev">
-            {% if article.prev %}
-            <a href="{{ article.prev.get_absolute_url }}">{{ article.prev }}</a>
-            {% else %}
-            <a href="{% url 'home' %}">home</a>
-            {% endif %}
-        </span>
-        <span class="article-nav-next">
-            {% if article.next %}
-            <a href="{{ article.next.get_absolute_url }}">{{ article.next }}</a>
-            {% else %}
-            <a href="{% url 'home' %}">home</a>
-            {% endif %}
-        </span>
-    </div>
-    <div class="article-comments">
-    </div>
+    <ul class="pagination">
+        {% if article.prev %}
+        <li class="page-item page-prev">
+            <a href="{{ article.prev.get_absolute_url }}">
+                <p class="page-item-meta">Previous</p>
+                <h3 class="page-item-title">{{ article.prev }}</h3>
+            </a>
+        </li>
+        {% endif %}
+        {% if article.next %}
+        <li class="page-item page-next">
+            <a href="{{ article.next.get_absolute_url }}">
+                <p class="page-item-meta">Next</p>
+                <h3 class="page-item-title">{{ article.next }}</h3>
+            </a>
+        </li>
+        {% endif %}
+    </ul>
     {% endif %}
 </article>
