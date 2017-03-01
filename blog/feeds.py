@@ -3,6 +3,26 @@ from django.utils.feedgenerator import Atom1Feed
 from django.urls import reverse
 from . import models
 
+
+class PostRssFeed(Feed):
+    description = ''
+    link = '/'
+    title = 'Latest posts'
+
+    def items(self, obj):
+        return models.Article.objects.published()
+
+    def item_title(self, item):
+        return item.title
+
+    def item_link(self, item):
+        return reverse('article', args=[item.slug])
+
+class PostAtomFeed(PostRssFeed):
+    feed_type = Atom1Feed
+    subtitle = PostRssFeed.description
+
+
 class CategoryRssFeed(Feed):
     description = ''
 

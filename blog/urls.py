@@ -5,6 +5,10 @@ from . import feeds
 from . import views
 
 urlpatterns = [
+    url(r'^feed/$', feeds.PostRssFeed(), name='post-rss-feed'),
+    url(r'^rss/$', feeds.PostRssFeed(), name='post-rss-feed'),
+    url(r'^atom/$', feeds.PostAtomFeed(), name='post-atom-feed'),
+
     url(r'^post/(?P<slug>[\w-]+)/$', views.article, name='article'),
 
     url(r'^category/(?P<slug>[\w-]+)/feed/$', feeds.CategoryRssFeed(), name='category-rss-feed'),
