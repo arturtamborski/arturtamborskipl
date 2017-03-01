@@ -14,7 +14,6 @@
 
         {% load static %}
         <link rel="stylesheet" href="{% static '/blog/css/spectre.min.css' %}">
-        <link rel="stylesheet" href="https://picturepan2.github.io/spectre/css/docs.css">
 <style>
 article {
     padding: 30px 0;
@@ -46,7 +45,6 @@ footer, footer a {
                 <div class="columns">
                     <div class="column centered text-center">
                         <a class="navbar-brand" href="{% url 'home' %}">Artur Tamborski</a>
-                        &emsp;
                         <div class="column text-center inline-block">
                             <a class="btn btn-link" href="{% url 'about' %}">About</a>
                             <a class="btn btn-link" href="{% url 'category' %}">Categories</a>
@@ -63,13 +61,13 @@ footer, footer a {
                 </div>
             </section>
         </header>
-        <main class="container">
-            <section class="column centered col-9 col-md-11 col-sm-12">
+        <main class="container grid-960">
+            <section class="centered column col-9 col-md-11 col-sm-12">
                 {% block content %}{% endblock %}
             </section>
         </main>
         <footer class="container">
-                <section class="column text-center centered col-9 col-md-11 col-sm-12">
+            <section class="column text-center centered col-9 col-md-11 col-sm-12">
                 <div class="divider">
                 </div>
                 <div>
