@@ -5,7 +5,7 @@
 
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="Wpisy o programowaniu i innych rzeczach.">
+        <meta name="description" content="My personal blog. You can find here posts about python, C, django, webdev gamedev linux and others.">
         <meta name="author" content="Artur Tamborski">
 
         <link rel="sitemap" type="application/xml" title="sitemap" href="{% url 'home' %}sitemap.xml">
@@ -37,7 +37,7 @@ footer, footer a {
 </style>
     </head>
     <body>
-        <header class="navbar container grid-960">
+        <header class="container grid-960">
             <section class="column centered col-9 col-md-11 col-sm-12">
                 <nav class="navbar container">
                     <section class="section navbar-section">
@@ -51,8 +51,8 @@ footer, footer a {
                     <section class="section navbar-section">
                         <div class="container">
                             <div class="columns">
-                                <form class="input-group input-inline" method="get">
-                                    <input class="form-input column col-sm-12" type="search" name="s">
+                                <form class="input-group input-inline" action="{% url 'search' %}" method="get">
+                                    <input class="form-input column col-sm-12" type="search" name="q">
                                     <input class="btn input-group-btn" type="submit" value="Search">
                                 </form>
                             </div>
