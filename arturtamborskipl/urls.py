@@ -10,7 +10,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
 
     url(r'^robots\.txt$', TemplateView.as_view(template_name='robots.txt', content_type='text/plain')),
-    url(r'^sitemap\.xml$', sitemap, {'sitemaps': {'blog': ArticleSitemap}}),
+    url(r'^sitemap\.xml$', sitemap, {'sitemaps': {'blog': ArticleSitemap}}, name='sitemap'),
 
     url(r'^', include('blog.urls')),
 ]
