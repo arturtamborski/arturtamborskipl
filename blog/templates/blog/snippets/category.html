@@ -1,13 +1,11 @@
 {% if category.article_set.published.count %}
-<h2>
-    <a href="{{ category.get_absolute_url }}">{{ category.name }}</a>
-{% if isroot %}
-{{ category.article_set.count }}
-</h2>
-{% else %}
-</h2>
-{% for article in category.article_set.published %}
-{% include 'blog/snippets/article.html' with isroot=1 %}
-{% endfor %}
-{% endif %}
+    <h2>
+        <a href="{% url 'category' category.slug %}">{{ category.name }}</a>
+        &emsp;{{ category.article_set.count }}
+        (<a href="{% url 'category-rss-feed' category.slug %}">RSS</a>,
+        <a href="{% url 'category-atom-feed' category.slug %}">Atom</a>)
+    </h2>
+    {% for article in category.article_set.published %}
+        {% include 'blog/snippets/article.html' with isroot=True %}
+    {% endfor %}
 {% endif %}

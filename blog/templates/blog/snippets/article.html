@@ -1,5 +1,5 @@
 <article>
-    <a href="{{ article.get_absolute_url }}">
+        <a href="{% url 'article' article.slug %}">
         <h2>{{ article.title }}</h2>
     </a>
     <div class="article-meta">
@@ -8,11 +8,11 @@
                 {{ article.date|date:"l, j E Y" }}
             </li>
             <li class="breadcrumb-item">
-                <a href="{{ article.category.get_absolute_url }}">{{ article.category }}</a></span>
+                <a href="{% url 'category' article.category.slug %}">{{ article.category }}</a></span>
             </li>
             <li class="breadcrumb-item">
                 {% for tag in article.tags.all %}
-                    <a href="{{ tag.get_absolute_url }}">{{ tag }}</a>
+                    <a href="{% url 'tag' tag.slug %}">{{ tag }}</a>
                 {% endfor %}
             </li>
         </ul>
@@ -26,7 +26,7 @@
     <ul class="pagination">
         {% if article.prev %}
         <li class="page-item page-prev">
-            <a href="{{ article.prev.get_absolute_url }}">
+            <a href="{% url 'article' article.prev.slug %}">
                 <p class="page-item-meta">Previous</p>
                 <h3 class="page-item-title">{{ article.prev }}</h3>
             </a>
@@ -34,7 +34,7 @@
         {% endif %}
         {% if article.next %}
         <li class="page-item page-next">
-            <a href="{{ article.next.get_absolute_url }}">
+            <a href="{% url 'article' article.next.slug %}">
                 <p class="page-item-meta">Next</p>
                 <h3 class="page-item-title">{{ article.next }}</h3>
             </a>
