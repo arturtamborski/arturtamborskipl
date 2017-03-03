@@ -4,60 +4,52 @@ from django.urls import reverse
 from . import models
 
 
-class PostRssFeed(Feed):
-    description = ''
-    link = '/'
+class ArticleFeed(Feed):
     title = 'Latest posts'
+
+    def get_object(self, request, slug):
+        return models.Articles.objects.published().get(slug=slug)
+
+    def title(self, item):
+        return item.title
+
+    def description(self, item):
+        return (item.content[:80] + '...') if len(item.content) > 80 else item.content
+
+    def link(self, item):
+        return reverse('article', args=[item.slug])
 
     def items(self, obj):
         return models.Article.objects.published()
 
-    def item_title(self, item):
-        return item.title
 
-    def item_link(self, item):
-        return reverse('article', args=[item.slug])
-
-class PostAtomFeed(PostRssFeed):
-    feed_type = Atom1Feed
-    subtitle = PostRssFeed.description
-
-
-class CategoryRssFeed(Feed):
+class CategoryFeed(Feed):
     description = ''
 
     def get_object(self, request, slug):
         return models.Category.objects.get(slug=slug)
 
-    def title(self, obj):
-        return obj.name
+    def title(self, item):
+        return item.name
 
-    def link(self, obj):
-        return obj.get_absolute_url()
+    def link(self, item):
+        return item.get_absolute_url()
 
-    def items(self, obj):
-        return models.Article.objects.published().filter(category=obj)
-
-class CategoryAtomFeed(CategoryRssFeed):
-    feed_type = Atom1Feed
-    subtitle = CategoryRssFeed.description
+    def items(self, item):
+        return models.Article.objects.published().filter(category=item)
 
 
-class TagRssFeed(Feed):
+class TagFeed(Feed):
     description = ''
 
     def get_object(self, request, slug):
         return models.Tag.objects.get(slug=slug)
 
-    def title(self, obj):
-        return obj.name
+    def title(self, item):
+        return item.name
 
-    def link(self, obj):
-        return obj.get_absolute_url()
+    def link(self, item):
+        return item.get_absolute_url()
 
-    def items(self, obj):
-        return models.Article.objects.published().filter(tags=obj)
-
-class TagAtomFeed(TagRssFeed):
-    feed_type = Atom1Feed
-    subtitle = TagRssFeed.description
+    def items(self, item):
+        return models.Article.objects.published().filter(tags=item)

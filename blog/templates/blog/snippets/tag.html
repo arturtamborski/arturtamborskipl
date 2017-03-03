@@ -1,10 +1,13 @@
 {% if tag.article_set.published.count %}
-    <h2>
+    <h2 class="inline-flex">
         <a href="{% url 'tag' tag.slug %}">{{ tag.name }}</a>
-        &emsp;{{ tag.article_set.count }}
-        (<a href="{% url 'tag-rss-feed' tag.slug %}">RSS</a>,
-        <a href="{% url 'tag-atom-feed' tag.slug %}">Atom</a>)
+        &emsp;
+        {{ tag.article_set.count }}
+        &emsp;
     </h2>
+        <h4 class="inline-flex">
+            <a href="{% url 'tag-feed' tag.slug %}">(Feed)</a>
+        </h4>
     {% for article in tag.article_set.published %}
         {% include 'blog/snippets/article.html' with isroot=True %}
     {% endfor %}
