@@ -40,24 +40,22 @@ footer, footer a {
 </style>
     </head>
     <body>
-        <header class="container">
-            <section class="navbar centered text-center col-9 col-md-11 col-sm-12">
-                <div class="columns">
-                    <div class="column centered text-center">
-                        <a class="navbar-brand" href="{% url 'home' %}">Artur Tamborski</a>
-                        <div class="column text-center inline-block">
-                            <a class="btn btn-link" href="{% url 'about' %}">About</a>
-                            <a class="btn btn-link" href="{% url 'category' %}">Categories</a>
-                            <a class="btn btn-link" href="{% url 'tag' %}">Tags</a>
-                        </div>
-                        &emsp;
-                        <div class="column centered inline-flex">
-                            <form class="input-group columns" action="{% url 'search' %}" method="get">
-                                <input class="form-input column col-sm-8" type="search" name="q">
-                                <input class="btn input-group-btn" type="submit" value="Search">
-                            </form>
-                        </div>
-                    </div>
+        <header class="container grid-960">
+            <section class="columns centered text-center col-9 col-md-11 col-sm-12">
+                <div class="column inline-flex">
+                    <a class="navbar-brand text-large" href="{% url 'home' %}">Artur Tamborski</a>
+                </div>
+                <div class="column inline-flex">
+                    <a class="btn btn-link" href="{% url 'about' %}">About</a>
+                    <a class="btn btn-link" href="{% url 'projects' %}">Projects</a>
+                    <a class="btn btn-link" href="{% url 'category' %}">Categories</a>
+                    <a class="btn btn-link" href="{% url 'tag' %}">Tags</a>
+                </div>
+                <div class="column inline-flex">
+                    <form class="columns input-group" action="{% url 'search' %}" method="get">
+                        <input class="column form-input" type="search" name="q">
+                        <input class="btn" type="submit" value="Search">
+                    </form>
                 </div>
             </section>
         </header>

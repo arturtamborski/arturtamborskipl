@@ -19,7 +19,7 @@ class ArticleFeed(Feed):
     def link(self, item):
         return reverse('article', args=[item.slug])
 
-    def items(self, obj):
+    def items(self, item):
         return models.Article.objects.published()
 
 
