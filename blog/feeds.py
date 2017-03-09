@@ -1,29 +1,28 @@
 from django.contrib.syndication.views import Feed
-from django.urls import reverse
+from django.urls import reverse_lazy
 
 from . import models
 
-FEED_DESCRIPTION_MAX = 200
-
 class ArticleFeed(Feed):
-    title = 'Latest posts'
-    link  = ''
+    title = 'Latest posts from my blog.'
+    link  = reverse_lazy('home')
 
     def items(self):
         return models.Article.objects.published()
 
     def item_description(self, item):
-        if len(item.content) > FEED_DESCRIPTION_MAX:
-            return item.content_html[:FEED_DESCRIPTION_MAX] + '...'
-        else:
-            return item.content_html
+        return item.content_html
+
+    def item_pubdate(self, item):
+        return item.date
 
 
 class CategoryFeed(Feed):
-    link = ''
-
     def title(self, item):
-        return 'Latest posts for category: ' + item.name
+        return 'Latest posts from category: ' + item.name
+
+    def link(self, item):
+        return item.get_absolute_url()
 
     def get_object(self, request, slug):
         return models.Category.objects.get(slug=slug)
@@ -31,18 +30,25 @@ class CategoryFeed(Feed):
     def items(self, item):
         return models.Article.objects.published().filter(category=item)
 
+    def item_title(self, item):
+        return item.title
+
     def item_description(self, item):
-        if len(item.content) > FEED_DESCRIPTION_MAX:
-            return item.content_html[:FEED_DESCRIPTION_MAX] + '...'
-        else:
-            return item.content_html
+        return item.content_html
+
+    def item_pubdate(self, item):
+        return item.date
+
+    def item_link(self, item):
+        return item.get_absolute_url()
 
 
 class TagFeed(Feed):
-    link = ''
-
     def title(self, item):
-        return item.name
+        return 'Latest posts from tag: ' + item.name
+
+    def link(self, item):
+        return item.get_absolute_url()
 
     def get_object(self, request, slug):
         return models.Tag.objects.get(slug=slug)
@@ -50,8 +56,14 @@ class TagFeed(Feed):
     def items(self, item):
         return models.Article.objects.published().filter(tags=item)
 
+    def item_title(self, item):
+        return item.title
+
     def item_description(self, item):
-        if len(item.content) > FEED_DESCRIPTION_MAX:
-            return item.content_html[:FEED_DESCRIPTION_MAX] + '...'
-        else:
-            return item.content_html
+        return item.content_html
+
+    def item_pubdate(self, item):
+        return item.date
+
+    def item_link(self, item):
+        return item.get_absolute_url()
