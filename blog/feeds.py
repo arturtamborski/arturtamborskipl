@@ -11,7 +11,7 @@ class ArticleFeed(Feed):
         return models.Article.objects.published()
 
     def item_description(self, item):
-        return item.content_html
+        return item.content_html[:200]
 
     def item_pubdate(self, item):
         return item.date
@@ -34,7 +34,7 @@ class CategoryFeed(Feed):
         return item.title
 
     def item_description(self, item):
-        return item.content_html
+        return item.content_html[:200]
 
     def item_pubdate(self, item):
         return item.date
@@ -60,7 +60,7 @@ class TagFeed(Feed):
         return item.title
 
     def item_description(self, item):
-        return item.content_html
+        return item.content_html[:200]
 
     def item_pubdate(self, item):
         return item.date

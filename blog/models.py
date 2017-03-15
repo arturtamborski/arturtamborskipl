@@ -24,9 +24,6 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
-    def __unicode__(self):
-        return u'{}'.format(self.name)
-
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
         super().save(*args, **kwargs)
@@ -50,9 +47,6 @@ class Tag(models.Model):
 
     def __str__(self):
         return self.name
-
-    def __unicode__(self):
-        return u'{}'.format(self.name)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self, self.name)
@@ -95,9 +89,6 @@ class Article(models.Model):
 
     def __str__(self):
         return self.title
-
-    def __unicode__(self):
-        return u'{}'.format(self.title)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
