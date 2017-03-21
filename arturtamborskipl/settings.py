@@ -1,6 +1,8 @@
 import os
 from decouple import config, Csv
 
+SITE_ID = 1
+
 ROOT_URLCONF        = 'arturtamborskipl.urls'
 WSGI_APPLICATION    = 'arturtamborskipl.wsgi.application'
 
@@ -33,6 +35,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sitemaps',
+    'django.contrib.sites',
+    'django_comments',
     'blog',
 ]
 

@@ -1,4 +1,4 @@
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.views.generic import TemplateView
 
 from . import feeds
@@ -15,6 +15,8 @@ urlpatterns = [
     url(r'^tag/(?P<slug>[\w-]+)/feed/$', feeds.TagFeed(), name='tag-feed'),
     url(r'^tag/(?P<slug>[\w-]+)/$', views.tag, name='tag'),
     url(r'^tag/$', views.tag, name='tag'),
+
+    url(r'^comments/', include('django_comments.urls')),
 
     url(r'^search/$', views.search, name='search'),
 

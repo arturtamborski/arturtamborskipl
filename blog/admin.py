@@ -1,20 +1,20 @@
 from django.contrib import admin
+from . import models
 
-from .models import Tag, Category, Article
 
-@admin.register(Tag)
+@admin.register(models.Tag)
 class TagAdmin(admin.ModelAdmin):
     ordering = ('name',)
     list_display = ('id', 'name',)
     search_fields = ('id', 'name',)
 
-@admin.register(Category)
+@admin.register(models.Category)
 class CategoryAdmin(admin.ModelAdmin):
     ordering = ('name',)
     list_display = ('id', 'name',)
     search_fields = ('id', 'name',)
 
-@admin.register(Article)
+@admin.register(models.Article)
 class ArticleAdmin(admin.ModelAdmin):
     ordering = ('-date',)
     list_filter = ('date',)
