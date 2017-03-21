@@ -1,48 +1,45 @@
 from django.utils import timezone
 from django.shortcuts import render
-
-from . import models as blog
-
-def article(request, slug=None):
-    objects = blog.Article.objects.published()
-    if slug is not None:
-        objects = objects.filter(slug=slug)
-
-    return render(request, 'blog/article.html', {
-        'isroot': slug is None,
-        'articles': objects,
-        })
+from django.views import generic
+from . import models
 
 
+class ArticleList(generic.ListView):
+    queryset            = models.Article.objects.published()
+    template_name       = 'blog/articles.html'
+    context_object_name = 'articles'
 
-def category(request, slug=None):
-    objects = blog.Category.objects.all()
-    if slug is not None:
-        objects = objects.filter(slug=slug)
+class ArticleDetail(generic.DetailView):
+    model               = models.Article
+    template_name       = 'blog/article.html'
+    context_object_name = 'article'
 
-    return render(request, 'blog/category.html', {
-        'isroot': slug is None,
-        'categories': objects,
-        })
+class CategoryList(generic.ListView):
+    queryset            = models.Category.objects.all()
+    template_name       = 'blog/categories.html'
+    context_object_name = 'categories'
 
+class CategoryDetail(generic.DetailView):
+    model               = models.Category
+    template_name       = 'blog/category.html'
+    context_object_name = 'category'
 
+class TagList(generic.ListView):
+    queryset            = models.Tag.objects.all()
+    template_name       = 'blog/tags.html'
+    context_object_name = 'tags'
 
-def tag(request, slug=None):
-    objects = blog.Tag.objects.all()
-    if slug is not None:
-        objects = objects.filter(slug=slug)
+class TagDetail(generic.DetailView):
+    model               = models.Tag
+    template_name       = 'blog/tag.html'
+    context_object_name = 'tag'
 
-    return render(request, 'blog/tag.html', {
-        'isroot': slug is None,
-        'tags': objects,
-        })
+class SearchList(generic.ListView):
+    model               = models.Article
+    template_name       = 'blog/search.html'
+    context_object_name = 'objects'
 
-
-
-def search(request):
-    q = request.GET.get('q', '')
-    objects = blog.Article.objects.search(q)
-
-    return render(request, 'blog/search.html', {
-            'objects': objects,
-        })
+    def get_queryset(self):
+        q = self.request.GET.get('q', '')
+        objects = models.Article.objects.search(q)
+        return objects

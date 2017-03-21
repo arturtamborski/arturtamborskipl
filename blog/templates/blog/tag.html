@@ -1,17 +1,9 @@
 {% extends "blog/base.html" %}
 
 {% block title %}
-    {% if tags.count == 1 %}
-        {{ tags.first.name }} |
-    {% endif %}
+    {{ tag.name }} |
 {% endblock %}
 
 {% block content %}
-    {% for tag in tags %}
-        {% include 'blog/snippets/tag.html' %}
-    {% endfor %}
-{% endblock %}
-
-{% block pager %}
-    {% include 'blog/snippets/pager.html' %}
+    {% include 'blog/snippets/tag.html' with asdetail=True %}
 {% endblock %}

@@ -9,6 +9,6 @@
         <a href="{% url 'category-feed' category.slug %}">(Feed)</a>
     </h4>
     {% for article in category.article_set.published %}
-        {% include 'blog/snippets/article.html' with isroot=True %}
+        {% include 'blog/snippets/article.html' with asdetail=asdetail %}
     {% endfor %}
 {% endif %}

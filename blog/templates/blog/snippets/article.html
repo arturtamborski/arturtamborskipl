@@ -18,7 +18,7 @@
         </ul>
     </div>
     <div>
-    {% if isroot %}
+    {% if not asdetail %}
         {{ article.content_html|truncatewords_html:40|safe }}
     {% else %}
         {{ article.content_html|safe }}
