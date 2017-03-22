@@ -9,6 +9,6 @@
             <a href="{% url 'tag-feed' tag.slug %}">(Feed)</a>
         </h4>
     {% for article in tag.article_set.published %}
-        {% include 'blog/snippets/article.html' with asdetail=asdetail %}
+        {% include 'blog/snippets/article.html' %}
     {% endfor %}
 {% endif %}
