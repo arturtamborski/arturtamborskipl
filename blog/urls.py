@@ -1,10 +1,12 @@
 from django.conf.urls import url, include
 from django.views.generic import TemplateView
+from django_comments.feeds import LatestCommentFeed
 
 from . import feeds
 from . import views
 
 urlpatterns = [
+    url(r'^comments/feed',                          LatestCommentFeed()),
     url(r'^comments/',                              include('django_comments.urls')),
 
     url(r'^posts/(?P<slug>[\w-]+)/$',               views.ArticleDetail.as_view(),  name='article'),

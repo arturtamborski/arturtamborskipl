@@ -5,7 +5,7 @@
 
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="My personal blog. You can find here posts about python, C, django, webdev gamedev linux and others.">
+        <meta name="description" content="My personal blog. You can find here posts about python, django, webdev, gamedev, C, linux and more.">
         <meta name="author" content="Artur Tamborski">
 
         <link rel="sitemap" type="application/xml" title="sitemap" href="{% url 'sitemap' %}">
@@ -21,16 +21,16 @@ article {
 .article-meta {
     margin-bottom: 15px;
 }
-.margin-10-h {
-    margin-left: 10px;
-    margin-right: 10px;
+.padding-10-h {
+    padding-left: 10px;
+    padding-right: 10px;
 }
-.margin-10-v {
-    margin-bottom: 10px;
+.padding-10-v {
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 .article-meta ul {
-    font-size: smaller;
-    font-style: italic;
+    font-size: small;
     padding: 0;
 }
 .my-icon {
@@ -40,6 +40,9 @@ article {
 }
 .my-center {
     margin: 0 auto;
+}
+.my-hidden {
+    display: none;
 }
 footer, footer a {
     color: #aaa;
@@ -77,7 +80,7 @@ footer, footer a {
                 </div>
             </section>
         </main>
-        <footer class="container">
+        <footer class="container grid-960">
             <section class="column text-center centered col-9 col-md-11 col-sm-12">
                 <div>
                     <a href="mailto:tamborskiartur@gmail.com">
@@ -91,7 +94,7 @@ footer, footer a {
                     </a>
                     <a href="{% url 'article-feed' %}">
                         <svg class="avatar my-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-3.374 17c-.897 0-1.626-.727-1.626-1.624s.729-1.624 1.626-1.624 1.626.727 1.626 1.624-.729 1.624-1.626 1.624zm3.885 0c-.03-3.022-2.485-5.474-5.511-5.504v-2.406c4.361.03 7.889 3.555 7.92 7.91h-2.409zm4.081 0c-.016-5.297-4.303-9.571-9.592-9.594v-2.406c6.623.023 11.985 5.384 12 12h-2.408z"/></svg>
-                </a>
+                    </a>
                 </div>
                 <div>
                     Copyright &copy; 2017

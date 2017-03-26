@@ -1,16 +1,16 @@
 {% load comments %}
 <article>
     <a href="{% url 'article' article.slug %}">
-        <h2 class="margin-10-h">{{ article.title }}</h2>
+        <h2 class="padding-10-h">{{ article.title }}</h2>
     </a>
-    <div class="article-meta margin-10-h">
+    <div class="article-meta padding-10-h">
         <ul class="breadcrumb">
             <li class="breadcrumb-item">
                 {{ article.date|date:"l, j E Y" }}
             </li>
             <li class="breadcrumb-item">
                 {% get_comment_count for article as comment_count %}
-                <a href="#comments">{{ comment_count }} comment{{ comment_count|pluralize }}</a>
+                <a href="{% url 'article' article.slug %}#comments">{{ comment_count }} comment{{ comment_count|pluralize }}</a>
             </li>
             <li class="breadcrumb-item">
                 <a href="{% url 'category' article.category.slug %}">{{ article.category }}</a></span>
@@ -22,7 +22,7 @@
             </li>
         </ul>
     </div>
-    <div class="text-large margin-10-h margin-10-v">
+    <div class="text-large padding-10-h margin-10-v">
         {% if not asdetail %}
             {{ article.content_html|truncatewords_html:60|safe }}
         {% else %}
@@ -47,56 +47,9 @@
             </li>
         {% endif %}
     </ul>
-    <div id="comments">
-        {% get_comment_list for article as comment_list %}
-        {% for comment in comment_list %}
-            {% if comment.is_public and not comment.is_removed %}
-            <div class="divider">
-            </div>
-                <ul class="breadcrumb">
-                    <li class="breadcrumb-item">
-                        <a href="mailto:{{ comment.email }}">
-                            <h5>{{ comment.user_name }}</h5>
-                        </a>
-                    </li>
-                    {% if comment.user_url %}
-                    <li class="breadcrumb-item">
-                        <a href="{{ comment.user_url }}">{{ comment.user_url }}</a>
-                    </li>
-                    {% endif %}
-                    <li class="breadcrumb-item">
-                        {{ comment.submit_date|date:"l, j E Y"}}
-                    </li>
-                </ul>
-                <div class="text-large margin-10-h margin-10-v">
-                    {{ comment.comment }}
-                </div>
-            {% endif %}
-        {% endfor %}
-        <form class="form-horizontal" action="{% comment_form_target %}" method="post">
-            {% csrf_token %}
-            {% get_comment_form for article as form %}
-            <div class="form-group">
-                <input type="hidden" name="next" value="{% url 'article' article.slug %}"/>
-                <div class="invisible">
-                    {{ form.content_type }}
-                    {{ form.object_pk }}
-                    {{ form.security_hash }}
-                    {{ form.timestamp }}
-                    {{ form.errorlist }}
-                </div>
-            </div>
-            <div class="form-group">
-                <input class="form-input" name="name" type="text" placeholder="Name*">
-            </div>
-            <div class="form-group">
-                <input class="form-input" name="email" type="email" placeholder="Email*">
-            </div>
-            <div class="form-group">
-                <textarea class="form-input" name="comment" maxlength="3000" rows="5" placeholder="Comment*"></textarea>
-            </div>
-            <input class="btn col-12 text-bold" name="submit" type="submit" value="Send">
-        </form>
+    <div class="article-meta padding-10-h" id="comments">
+        {% render_comment_list for article %}
     </div>
+    {% render_comment_form for article %}
     {% endif %}
 </article>

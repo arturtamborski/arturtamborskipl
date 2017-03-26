@@ -1,0 +1,23 @@
+{% load comments %}
+{% get_comment_list for article as comment_list %}
+{% for comment in comment_list %}
+    {% if comment.is_public and not comment.is_removed %}
+        <div class="padding-10-v">
+            <div class="divider">
+            </div>
+            <ul class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="mailto:{{ comment.email }}">
+                        <h5>{{ comment.user_name }}</h5>
+                    </a>
+                </li>
+                <li class="breadcrumb-item">
+                    {{ comment.submit_date|date:"l, j E Y"}}
+                </li>
+            </ul>
+            <div class="text-large padding-10-v">
+                {{ comment.comment }}
+            </div>
+        </div>
+    {% endif %}
+{% endfor %}
