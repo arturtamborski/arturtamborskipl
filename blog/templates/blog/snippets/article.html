@@ -1,9 +1,9 @@
 {% load comments %}
 <article>
     <a href="{% url 'article' article.slug %}">
-        <h2 class="padding-10-h">{{ article.title }}</h2>
+        <h2 class="">{{ article.title }}</h2>
     </a>
-    <div class="article-meta padding-10-h">
+    <div class="article-meta">
         <ul class="breadcrumb">
             <li class="breadcrumb-item">
                 {{ article.date|date:"l, j E Y" }}
@@ -22,7 +22,7 @@
             </li>
         </ul>
     </div>
-    <div class="padding-10-h margin-10-v">
+    <div class="padding-10-v">
         {% if not asdetail %}
             {{ article.content_html|truncatewords_html:60|safe }}
         {% else %}
@@ -47,7 +47,7 @@
             </li>
         {% endif %}
     </ul>
-    <div class="article-meta padding-10-h" id="comments">
+    <div class="article-meta" id="comments">
         {% render_comment_list for article %}
     </div>
     {% render_comment_form for article %}
