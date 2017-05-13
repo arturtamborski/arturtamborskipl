@@ -5,17 +5,20 @@ from . import models
 
 
 class ArticleList(generic.ListView):
-    queryset            = models.Article.objects.published()
+    model               = models.Article
+    queryset            = models.Article.objects.published().select_related('category')
     template_name       = 'blog/articles.html'
     context_object_name = 'articles'
 
 class ArticleDetail(generic.DetailView):
     model               = models.Article
+    queryset            = models.Article.objects.published().select_related('category')
     template_name       = 'blog/article.html'
     context_object_name = 'article'
 
 class CategoryList(generic.ListView):
-    queryset            = models.Category.objects.all()
+    model               = models.Category
+    queryset            = models.Category.objects.all().select_related('article')
     template_name       = 'blog/categories.html'
     context_object_name = 'categories'
 
