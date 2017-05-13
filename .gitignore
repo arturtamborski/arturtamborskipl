@@ -1,0 +1,17 @@
+settings.ini
+*.py[cod]
+
+*.db
+db.sqlite3
+__pycache__/
+migrations/
+env/
+myvenv/
+build/
+dist/
+pip-log.txt
+
+# ignore static files from ./manage.py collectstatic
+/static
+/media
+/logs
