@@ -1,12 +1,11 @@
 [settings]
-DEBUG=False
-
+DEBUG=True
+ALLOWED_HOSTS=127.0.0.1, localhost
+INTERNAL_IPS=127.0.0.1
 # You can get this key from https://github.com/ariestiyansyah/django-secret-key
-SECRET_KEY=asdaasdasdasdadasdasdasdasd
+SECRET_KEY=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 
-DB_NAME=django
-DB_USER=postgres
-DB_PASSWORD=blah blah blah random password here
+DB_NAME=dbname
+DB_USER=dbuser
+DB_PASSWORD=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 DB_HOST=127.0.0.1
-
-ALLOWED_HOSTS=.localhost, .example.com
