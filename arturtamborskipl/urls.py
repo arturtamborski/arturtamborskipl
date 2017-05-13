@@ -3,6 +3,7 @@ from django.contrib import admin
 from django.views.generic import RedirectView
 from django.views.generic import TemplateView
 from django.contrib.sitemaps.views import sitemap
+from django.conf import settings
 
 from blog.sitemaps import ArticleSitemap
 
@@ -14,3 +15,9 @@ urlpatterns = [
 
     url(r'^', include('blog.urls')),
 ]
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns += [
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    ]

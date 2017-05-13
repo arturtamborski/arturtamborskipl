@@ -10,6 +10,7 @@ BASE_DIR        = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 DEBUG           = config('DEBUG', default=False, cast=bool)
 ALLOWED_HOSTS   = config('ALLOWED_HOSTS', cast=Csv())
+INTERNAL_IPS    = config('INTERNAL_IPS', cast=Csv())
 SECRET_KEY      = config('SECRET_KEY')
 
 DB_NAME         = config('DB_NAME')
@@ -40,6 +41,11 @@ INSTALLED_APPS = [
     'blog',
 ]
 
+if DEBUG:
+    INSTALLED_APPS += [
+        'debug_toolbar',
+    ]
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -49,6 +55,11 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+if DEBUG:
+    MIDDLEWARE += [
+        'debug_toolbar.middleware.DebugToolbarMiddleware',
+    ]
 
 TEMPLATES = [
     {
