@@ -40,8 +40,8 @@ class TagQuerySet(models.QuerySet):
 
 
 class Tag(models.Model):
-    name = models.CharField(max_length=64)
-    slug = models.SlugField(unique=True, editable=False)
+    name = models.CharField(max_length=256)
+    slug = models.SlugField(max_length=256, unique=True, editable=False)
 
     objects = TagQuerySet().as_manager()
 
@@ -75,7 +75,7 @@ class ArticleQuerySet(models.QuerySet):
 
 class Article(models.Model):
     title    = models.CharField(max_length=256)
-    slug     = models.SlugField(unique=True, editable=False)
+    slug     = models.SlugField(max_length=256, unique=True, editable=False)
     date     = models.DateTimeField(default=timezone.now)
     tags     = models.ManyToManyField(Tag)
     category = models.ForeignKey(Category)
