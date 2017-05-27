@@ -13,7 +13,7 @@ class CategoryQuerySet(models.QuerySet):
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=64)
+    name = models.CharField(max_length=256)
     slug = models.SlugField(unique=True, editable=False)
 
     objects = CategoryQuerySet().as_manager()
